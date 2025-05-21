@@ -1,0 +1,168 @@
+## 1. Introduction to Lists
+- **What is a List?**
+    - A list is used to store collection of items in Python.
+    - Can store mixed data types (e.g., integers, strings, floats).
+    - Defined using square brackets `[]` .
+    - Example:my_list = [1, "apple", 3.14]
+print(my_list)  # Output: [1, "apple", 3.14]
+- **Key Features**:
+    - **Mutable**: Can change elements.
+    - **Ordered**: Maintains insertion order.
+    - **Indexed**: Access via 0-based indices.
+    - Example:fruits = ["apple", "banana", "orange"]
+print(fruits[1])  # Output: banana
+fruits[1] = "grape"
+print(fruits)  # Output: ["apple", "grape", "orange"]
+- **Common Operations**:
+    - Append: `list.append(item)`  – Add to end.
+    - Insert: `list.insert(index, item)`  – Add at index.
+    - Remove: `list.remove(item)`  – Remove first occurrence.
+    - Pop: `list.pop(index)`  – Remove and return item (default: last).
+    - Length: `len(list)`  – Number of items.
+    - Example:numbers = [1, 2, 3]
+numbers.append(4)  # [1, 2, 3, 4]
+numbers.insert(1, 1.5)  # [1, 1.5, 2, 3, 4]
+numbers.remove(2)  # [1, 1.5, 3, 4]
+popped = numbers.pop()  # [1, 1.5, 3], popped = 4
+print(len(numbers))  # Output: 3
+## 2. Time Complexity
+We measure efficiency of program by time and space it took during the execution of the program.
+
+**Techniques To Measure TC.**
+
+1) Measure time to calculate exact time.(e g: 2 sec)
+
+2) Count number of operations while execution of the program.
+
+3) Order of growth.
+
+- **Importance**:
+    - Predicts performance for large datasets.
+    - Helps choose efficient algorithms.
+
+
+## 1. Understanding Order of Growth    O(n)
+**Definition**:
+Order of growth describes how the **number of operations** (like comparisons or assignments) performed by an algorithm **scales with input size** `n` . This is typically expressed using **Big-O notation**.
+
+**Goal**:
+To understand how the **work done by an algorithm grows** as the input size increases — helping us compare algorithms regardless of hardware or language.
+
+**Why Simplify?**
+For large `n` , constants and lower-order terms have minimal impact. Big-O focuses on the **dominant term**, which most influences performance as input grows.
+
+### ✅ **Best Case**
+- The **best case** is when the algorithm completes the task in the **least possible time**, due to the most favorable input.
+### ✅ **Worst Case**
+- The **worst case** is when the algorithm takes the **longest time** to complete, due to the least favorable input.
+###  Example: Linear Search
+Suppose you are searching for a number in a list:
+
+```python
+def linear_search(arr, target):
+for i in range(len(arr)):
+    if arr[i] == target:
+        return i
+return -1
+```
+#### Input list: `[1, 2, 3, 4, 5]` 
+#### Target: `1` 
+- **Best Case**: `target`  is at the first position.
+ → Found immediately → **1 comparison** → Best case time: **O(1)**
+#### Target: `5` 
+- **Worst Case**: `target`  is at the last position or not in the list.
+ → Need to check all elements → **n comparisons** → Worst case time: **O(n)**
+## 2. Rules for Simplifying to Big-O Notation
+To deduce the order of growth, follow these rules when analyzing an equation or algorithm:
+
+1. **Ignore Multiplicative Constants**:
+    - Constants (e.g., 2, 5, 100) multiplying the dominant term are dropped.
+    - Reason: Big-O focuses on growth rate, not exact counts.
+    - Example: If an algorithm takes 3n steps, simplify to **O(n), not O(3n).**
+2. **Remove Additive/Subtractive Constants**:
+    - Constant terms (e.g., +5, +100) are ignored.
+    - Reason: For large n, constants become insignificant.
+    - Example: If an algorithm takes **n + 10 steps, simplify to O(n).**
+3. **Focus on the Dominant Term**:
+    - Keep only the term with the fastest growth rate.
+    - Common growth rates (from slowest to fastest): O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ).
+    - Example: If an algorithm takes** n² + 3n + 5 **steps, simplify to O(n²) because n² grows fastest.
+4. **Consider Worst-Case Scenario**:
+    - Big-O typically describes the upper bound (worst-case performance).
+    - Example: Searching a list may find an item early (best case), but assume it scans the entire list (worst case, O(n)).
+5. **Analyze Loops and Nested Loops**:
+    - Single loop over n elements: O(n).
+    - Nested loops (two loops, each n): O(n²).
+    - Example: A loop with n iterations, each doing constant work (e.g., accessing a list element), is O(n).
+## 3. Applying Rules to List Operations
+- **Examples with Lists**:
+    - **Access**: `list[i]`  → O(1).
+        - Equation: 1 step (constant).
+        - Simplified: O(1).
+    - **Append**: `list.append(item)`  → O(1) 
+        - Equation: 1 step (ignoring occasional resizing).
+        - Simplified: O(1).
+    - **Insert**: `list.insert(index, item)`  → O(n).
+        - Equation: n shifts (worst case, inserting at start).
+        - Simplified: O(n).
+    - **Search**: `item in list`  → O(n).
+        - Equation: n comparisons (worst case, item not found).
+        - Simplified: O(n).
+Eg:  3n² ~ n^2
+
+ n² + 5 + n² = 2n^2 + 5 = O(n^2) 
+
+n² + n → n²
+
+
+
+![time-complexity.jpg](https://eraser.imgix.net/workspaces/1JgspICoHNnxel1fMR8l/kaehLMEV2QcnQUDg4tjYnZb53ky1/ULlv_YefJ26WxzJD9hJhj.jpg?ixlib=js-3.7.0 "time-complexity.jpg")
+
+ 
+
+## 3. Space Complexity
+- **Definition**:
+    - Measures memory usage as input size grows.
+    - Includes variables, data structures, call stack.
+    - Uses Big-O notation.
+- **Importance**:
+    - Optimizes memory usage.
+    - Critical for resource-constrained systems.
+- **Space Complexity of Lists**:
+    - Storing list: O(n) (n = number of elements).
+    - Append: O(1) additional space (excluding list).
+    - Insert/Remove: O(1) additional space (shifts in-place).
+    - Temporary variables: Depends on algorithm (e.g., new list is O(n)).
+    - Example:my_list = [1, 2, 3]  # Space: O(n), n=3
+new_list = my_list.copy()  # Space: O(n) for new_list
+temp = my_list[0]  # Space: O(1) for temp
+
+
+### **Question 1: Nested Loops (Quadratic Time)**
+```python
+def print_pairs(n):
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+```
+✅ **Time Complexity:**
+ Outer loop runs `n` times, inner loop also runs `n` times →
+ **T.C. = O(n × n) = O(n²)**
+
+---
+
+### **Question 2: Two Linear Loops (Linear Time Twice)**
+```python
+def print_lines(n):
+for i in range(n):
+    print("Line A:", i)
+
+for j in range(n):
+    print("Line B:", j)
+```
+✅ **Time Complexity:**
+ Each loop runs `n` times independently →
+ **T.C. = O(n) + O(n) = O(2n) = O(n)** (drop constant)
+
+
+
